@@ -15,7 +15,10 @@ con <- DBI::dbConnect(RSQLite::SQLite(), dbname = "CCLE_expression.sqlite")
 exp_dat <- tbl(con, "expression")
 all_genes <- exp_dat %>% distinct(gene) %>% collect() %>% pull(gene)
 
-sample_info <- read_csv("sample_info.csv")
+sample_info <- read_csv("sample_info.csv", 
+                        col_types = cols(
+                            depmap_public_comments = col_character()
+                        ))
 
 get_expression_table <- function(cell_lines, genes){
     cell_line_name = sample_info %>%

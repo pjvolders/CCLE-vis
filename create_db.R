@@ -1,6 +1,16 @@
 library(dplyr)
 library(tidyverse)
 
+if(!file.exists("CCLE_expression.csv")){
+  download.file("https://ndownloader.figshare.com/files/26261476", 
+                "CCLE_expression.csv")
+}
+
+if(!file.exists("sample_info.csv")){
+  download.file("https://ndownloader.figshare.com/files/26261569", 
+                "sample_info.csv")
+}
+
 exp_dat <- read_csv("CCLE_expression.csv")
 
 exp_dat.clean = exp_dat %>%
